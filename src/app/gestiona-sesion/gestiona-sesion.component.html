@@ -1,0 +1,5 @@
+<p *ngIf="sesionIniciada">La sesión está iniciada actualmente</p>
+<p *ngIf="!sesionIniciada">La sesión no está iniciada actualmente</p>
+
+<button mat-raised-button color="primary" (click)="iniciaSesion()">Iniciar sesión</button>
+<button mat-raised-button color="accent" (click)="cierraSesion()">Cerrar sesión</button>

@@ -1,6 +1,24 @@
 <h2>Componente expositor</h2>
 <p>El modo actual es: {{modoElegido}}</p>
 
+<mat-card *ngFor="let libro of misLibros">
+    <mat-card-title >{{libro.titulo | uppercase}}</mat-card-title>
+    <mat-card-subtitle>{{libro.autor}}</mat-card-subtitle>
+    <mat-card-subtitle>{{libro.precio}} €</mat-card-subtitle>
+    <mat-card-subtitle>{{libro.stock}} unidades</mat-card-subtitle>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Comprar</button>
+      <button mat-raised-button color="accent">Añadir</button>
+      <button mat-raised-button color="warn">Restar</button>
+    </mat-card-actions>
+  </mat-card>
+
+
+  <pre>
+    {{misLibros | json}}
+    </pre>
+
+
 <div *ngIf="modoElegido === 'Comprar'">
     <p>Carrito de la compra: 0 unidades</p>
 </div>
