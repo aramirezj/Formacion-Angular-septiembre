@@ -1,5 +1,32 @@
 <p *ngIf="sesionIniciada">La sesión está iniciada actualmente</p>
 <p *ngIf="!sesionIniciada">La sesión no está iniciada actualmente</p>
 
-<button mat-raised-button color="primary" (click)="iniciaSesion()">Iniciar sesión</button>
+<form [formGroup]="formularioLogin">
+    <mat-form-field appearance="fill">
+        <mat-label>Correo eléctronico</mat-label>
+        <input matInput formControlName="email" placeholder="pat@example.com">
+        <mat-error *ngIf="formularioLogin.get('email').hasError('required')">El campo es obligatorio</mat-error>
+        <mat-error *ngIf="formularioLogin.get('email').hasError('email')">El campo no es un email correcto</mat-error>
+        <mat-error *ngIf="formularioLogin.get('email').hasError('minlength')">El campo debe superar los 5 carácteres
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+        <mat-label>Contraseña</mat-label>
+        <input matInput formControlName="password" type="password" placeholder="pat@example.com">
+        <mat-error *ngIf="formularioLogin.get('password').hasError('required')">El campo es obligatorio</mat-error>
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" (click)="iniciaSesion()" [disabled]="!formularioLogin.valid">Iniciar sesión</button>
+    <button mat-raised-button color="accent" (click)="formularioLogin.reset()">Reiniciar</button>
+</form>
+
+<pre>
+    {{formularioLogin.value | json}}
+    <br>
+</pre>
+<br>
+
+
+
 <button mat-raised-button color="accent" (click)="cierraSesion()">Cerrar sesión</button>

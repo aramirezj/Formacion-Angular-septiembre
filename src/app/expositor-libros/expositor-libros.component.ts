@@ -14,6 +14,9 @@ export class ExpositorLibrosComponent implements OnInit, AfterViewInit {
     misLibros: Libro[];
 
 
+    librosComprados:Libro[] = [];
+
+
 
 
     constructor() {
@@ -25,7 +28,7 @@ export class ExpositorLibrosComponent implements OnInit, AfterViewInit {
 
         const libro1: Libro = { titulo: 'Cien años de soledad', autor: 'Gabriel Garcia Marquez', precio: 10, stock: 5 };
         const libro2: Libro = { titulo: 'Lazarillo de Tormes', precio: 10, stock: 5 };
-        this.misLibros = [libro1, libro2, { titulo: 'Relato de un naufrago',autor:'Gabriel Garcia Marquez', precio: 15, stock: 3 }];
+        this.misLibros = [libro1, libro2, { titulo: 'Relato de un naufrago', autor: 'Gabriel Garcia Marquez', precio: 15, stock: 3 }];
 
         console.log('ejecuto ng OnInit');
         this.cambiaModo('Comprar');
@@ -45,6 +48,12 @@ export class ExpositorLibrosComponent implements OnInit, AfterViewInit {
      */
     cambiaModo(modoNuevo: string): void {
         this.modoElegido = modoNuevo;
+    }
+
+    libroCompradoRecibido(libroComprado:Libro) {
+        console.log(libroComprado);
+        this.librosComprados.push(libroComprado);
+
     }
 
 }

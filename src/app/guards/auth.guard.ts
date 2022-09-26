@@ -10,6 +10,7 @@ export class AuthGuard implements CanActivate {
             //Si hay token asignado, permito entrar a la ruta
             return true;
         }
+        alert('Debe iniciar sesión previamente');
         return false;
     }
 
