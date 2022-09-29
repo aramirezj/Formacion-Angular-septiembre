@@ -17,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LibroComponent } from './libro/libro.component';
-
+import {MatSliderModule} from '@angular/material/slider';
+import { LibroService } from './services/libro.service';
 @NgModule({
     declarations: [
         AppComponent,
@@ -38,9 +39,10 @@ import { LibroComponent } from './libro/libro.component';
         FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
-        MatInputModule
+        MatInputModule,
+        MatSliderModule
     ],
-    providers: [AuthGuard],
+    providers: [AuthGuard, LibroService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

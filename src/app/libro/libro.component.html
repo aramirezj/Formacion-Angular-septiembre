@@ -1,9 +1,9 @@
 <mat-card>
     <mat-card-title>{{libro.titulo | uppercase}}</mat-card-title>
     <mat-card-subtitle>{{libro.autor}}</mat-card-subtitle>
-    <mat-card-subtitle>{{libro.precio}} €</mat-card-subtitle>
-    <mat-card-subtitle>{{libro.stock}} unidades</mat-card-subtitle>
-    <mat-card-actions>
+    <mat-card-subtitle *ngIf="libro.precio">{{libro.precio}} €</mat-card-subtitle>
+    <mat-card-subtitle *ngIf="libro.stock">{{libro.stock}} unidades</mat-card-subtitle>
+    <mat-card-actions *ngIf="!modoLectura">
         <button mat-raised-button color="primary" (click)="comprar()">Comprar</button>
         <button mat-raised-button color="accent" (click)="add()">Añadir</button>
         <button mat-raised-button color="warn" (click)="restar()">Restar</button>

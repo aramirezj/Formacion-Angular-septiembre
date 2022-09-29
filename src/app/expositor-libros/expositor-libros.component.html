@@ -5,14 +5,10 @@
     <p>Carrito de la compra: {{librosComprados.length}} unidades</p>
 </div>
 
+<h2 *ngIf="!misLibros">Cargando de base de datos...</h2>
+
 <app-libro *ngFor="let libroIterado of misLibros" [libro]="libroIterado"
     (notificacionCompra)="libroCompradoRecibido(libroIterado)"></app-libro>
 
 <button mat-raised-button color="primary" (click)="modoElegido = 'Comprar' ">Activa Compra</button>
 <button mat-raised-button color="primary" (click)="cambiaModo('Visita')">Activa Visita</button>
-
-
-
-<pre>
-    {{misLibros | json}}
-    </pre>

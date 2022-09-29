@@ -9,6 +9,8 @@ import { Libro } from '../Libro';
 export class LibroComponent implements OnInit {
     /** Información del libro que tiene que mostrar recibida de su componente padre */
     @Input() libro: Libro;
+    /** Modo de lectura del componente, que hace que, los botones se oculten */
+    @Input() modoLectura:boolean = false;
     /** Evento de notificación a enviar cuando se compra un libro */
     @Output() notificacionCompra: EventEmitter<void> = new EventEmitter();
 
@@ -16,7 +18,6 @@ export class LibroComponent implements OnInit {
     constructor() { }
 
     ngOnInit(): void {
-        console.log(this.libro)
     }
 
     /** Método que resta una unidad del libro, y emite el evento */

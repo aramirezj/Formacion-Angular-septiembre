@@ -1,5 +1,6 @@
 import { Component, OnInit, AfterViewInit } from "@angular/core";
 import { Libro } from "../Libro";
+import { LibroService } from "../services/libro.service";
 
 
 @Component({
@@ -14,29 +15,34 @@ export class ExpositorLibrosComponent implements OnInit, AfterViewInit {
     misLibros: Libro[];
 
 
-    librosComprados:Libro[] = [];
+    librosComprados: Libro[] = [];
 
 
 
 
-    constructor() {
-        console.log('Soy el constructor');
+    constructor(
+        private libroService: LibroService
+    ) {
+        this.libroService.miLibroFavorito = 'Cronicas de una muerte anunciada';
     }
 
     ngOnInit(): void {
 
+        /* this.libroService.recuperaLibros().then(librosRecibidos => {
+             this.misLibros = librosRecibidos;
+         }) */
 
-        const libro1: Libro = { titulo: 'Cien años de soledad', autor: 'Gabriel Garcia Marquez', precio: 10, stock: 5 };
-        const libro2: Libro = { titulo: 'Lazarillo de Tormes', precio: 10, stock: 5 };
-        this.misLibros = [libro1, libro2, { titulo: 'Relato de un naufrago', autor: 'Gabriel Garcia Marquez', precio: 15, stock: 3 }];
+        this.libroService.recuperaLibrosOBS().subscribe(librosRecibidos => {
+            console.log(librosRecibidos);
+            this.misLibros = librosRecibidos;
+        });
 
-        console.log('ejecuto ng OnInit');
+
+
         this.cambiaModo('Comprar');
     }
 
     ngAfterViewInit(): void {
-        console.log('La vista se ha cargado');
-        console.log(this.misLibros)
     }
 
 
@@ -50,10 +56,15 @@ export class ExpositorLibrosComponent implements OnInit, AfterViewInit {
         this.modoElegido = modoNuevo;
     }
 
-    libroCompradoRecibido(libroComprado:Libro) {
+    libroCompradoRecibido(libroComprado: Libro) {
         console.log(libroComprado);
         this.librosComprados.push(libroComprado);
 
     }
+
+
+
+
+
 
 }
