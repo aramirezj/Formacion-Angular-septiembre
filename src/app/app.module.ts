@@ -17,8 +17,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { LibroComponent } from './libro/libro.component';
-import {MatSliderModule} from '@angular/material/slider';
+import { MatSliderModule } from '@angular/material/slider';
 import { LibroService } from './services/libro.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatDialogModule } from '@angular/material/dialog';
+import { EdicionLibroComponent } from './edicion-libro/edicion-libro.component';
+import { AddPuntosPipe } from './add-puntos.pipe';
+import { DecoraEtiquetasDirective } from './decora-etiquetas.directive';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -26,6 +32,9 @@ import { LibroService } from './services/libro.service';
         CreacionLibrosComponent,
         GestionaSesionComponent,
         LibroComponent,
+        EdicionLibroComponent,
+        AddPuntosPipe,
+        DecoraEtiquetasDirective,
     ],
     imports: [
         BrowserModule,
@@ -40,7 +49,9 @@ import { LibroService } from './services/libro.service';
         ReactiveFormsModule,
         MatFormFieldModule,
         MatInputModule,
-        MatSliderModule
+        MatSliderModule,
+        MatSnackBarModule,
+        MatDialogModule
     ],
     providers: [AuthGuard, LibroService],
     bootstrap: [AppComponent]

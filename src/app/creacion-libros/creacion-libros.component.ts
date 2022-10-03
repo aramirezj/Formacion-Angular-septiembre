@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Libro } from '../Libro';
 import { LibroService } from '../services/libro.service';
 
@@ -14,7 +15,8 @@ export class CreacionLibrosComponent implements OnInit {
     libroCreado: Libro = {} as Libro;
     mensajeExito: string;
     constructor(
-        private libroService: LibroService
+        private libroService: LibroService,
+        private _snackBar: MatSnackBar
     ) {
         console.log(this.libroService.miLibroFavorito);
     }
@@ -44,8 +46,10 @@ export class CreacionLibrosComponent implements OnInit {
                 this.mensajeExito = '!Libro guardado satisfactoriamente!';
                 this.formularioCreacion.reset({}, { emitEvent: false });
                 this.libroCreado = {} as Libro;
-
+                this._snackBar.open('Libro creado correctamente', 'Cerrar');
             });
+        } else {
+            this._snackBar.open('Hay campos incorrectos, revisa el formulario', 'Cerrar');
         }
     }
 

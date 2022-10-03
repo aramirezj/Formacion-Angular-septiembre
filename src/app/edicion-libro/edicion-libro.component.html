@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Formulario edición libro</h2>
+<mat-dialog-content>
+    <form [formGroup]="formularioEdicion">
+
+        <mat-form-field appearance="fill">
+            <mat-label>Titulo del libro</mat-label>
+            <input matInput formControlName="titulo">
+            <mat-error *ngIf="formularioEdicion.get('titulo').hasError('required')">El campo es obligatorio</mat-error>
+            <mat-error *ngIf="formularioEdicion.get('titulo').hasError('minlength')">El campo debe superar los 3 carácteres
+            </mat-error>
+            <mat-error *ngIf="formularioEdicion.get('titulo').hasError('maxlength')">El campo no debe superar los 20
+                carácteres
+            </mat-error>
+        </mat-form-field>
+    
+        <div>
+            <mat-label>Stock disponible:</mat-label>
+            <mat-slider max="30" min="1" step="1" tickInterval="1" [thumbLabel]="true" formControlName="stock"></mat-slider>
+            <mat-error *ngIf="formularioEdicion.get('stock').hasError('required') && formularioEdicion.get('stock').touched">El campo es obligatorio</mat-error>
+            <mat-error *ngIf="formularioEdicion.get('stock').hasError('min')">Debe haber al menos un libro</mat-error>
+        </div>
+    
+        <mat-form-field appearance="fill">
+            <mat-label>Autor</mat-label>
+            <input matInput formControlName="autor">
+        </mat-form-field>
+    
+        <mat-form-field appearance="fill">
+            <mat-label>Precio</mat-label>
+            <input matInput type="number" formControlName="precio">
+            <span matPrefix>€&nbsp;</span>
+            <span matSuffix>.00</span>
+            <mat-error *ngIf="formularioEdicion.get('precio').hasError('required')">El campo es obligatorio</mat-error>
+            <mat-error *ngIf="formularioEdicion.get('precio').hasError('min')">El precio debe superar 1€
+            </mat-error>
+        </mat-form-field>
+    
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button color="warn" (click)="cancelar()">Cancelar</button>
+  <button mat-button color="primary" (click)="guardar()">Guardar</button>
+</mat-dialog-actions>

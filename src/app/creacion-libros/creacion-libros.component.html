@@ -35,7 +35,7 @@
     </mat-form-field>
 
     <p *ngIf="mensajeExito">{{mensajeExito}}</p>
-    <button mat-raised-button color="primary" (click)="crearLibro()" [disabled]="!formularioCreacion.valid">Crear libro</button>
+    <button mat-raised-button color="primary" (click)="crearLibro()" >Crear libro</button>
     <button mat-raised-button color="accent" (click)="formularioCreacion.reset()">Reiniciar</button>
 
 </form>

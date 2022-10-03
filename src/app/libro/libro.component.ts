@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { EdicionLibroComponent } from '../edicion-libro/edicion-libro.component';
 import { Libro } from '../Libro';
+import { LibroService } from '../services/libro.service';
 
 @Component({
     selector: 'app-libro',
@@ -10,12 +13,26 @@ export class LibroComponent implements OnInit {
     /** Información del libro que tiene que mostrar recibida de su componente padre */
     @Input() libro: Libro;
     /** Modo de lectura del componente, que hace que, los botones se oculten */
-    @Input() modoLectura:boolean = false;
+    @Input() modoLectura: boolean = false;
+    /** Modo de lectura del componente, que hace que, los botones se oculten */
+    @Input() modoElegido: string;
     /** Evento de notificación a enviar cuando se compra un libro */
     @Output() notificacionCompra: EventEmitter<void> = new EventEmitter();
 
 
-    constructor() { }
+    constructor(
+        private libroService: LibroService,
+        public dialog: MatDialog
+    ) { }
+
+    //
+    borrar() {
+        this.libroService.borraLibroBBDD(this.libro).
+            subscribe(resultado => {
+                console.log(resultado);
+            })
+    }
+
 
     ngOnInit(): void {
     }
@@ -44,5 +61,21 @@ export class LibroComponent implements OnInit {
         return false;
 
     }
+
+    /** Función que invoca un dialogo de edición, y al guardarlo se actualiza */
+    editar() {
+        const configDialog: MatDialogConfig = { data: { libro: this.libro } };
+        const dialogRef = this.dialog.open(EdicionLibroComponent, configDialog);
+
+        dialogRef.afterClosed().subscribe(libroActualizado => {
+            //if(libroActualizado){
+                this.libro = libroActualizado;
+           // }
+        
+        });
+
+    }
+
+
 
 }
