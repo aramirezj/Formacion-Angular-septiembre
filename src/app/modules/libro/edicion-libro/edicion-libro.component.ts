@@ -1,8 +1,8 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Libro } from '../Libro';
-import { LibroService } from '../services/libro.service';
+import { Libro } from '../../../interfaces/Libro';
+import { LibroService } from '../../../services/libro.service';
 
 @Component({
     selector: 'app-edicion-libro',

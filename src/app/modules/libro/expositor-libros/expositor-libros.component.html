@@ -3,7 +3,14 @@
 <p>El modo actual es: {{modoElegido}}</p>
 
 
+<h1>Tabla libros</h1>
+<app-tabla-generica *ngIf="misLibros" [datos]="misLibros" [columnas]="['Titulo','Autor','Precio','Stock']"
+    [modelos]="['titulo','autor','precio','stock']">
+</app-tabla-generica>
 
+<h1>Tabla autores</h1>
+<app-tabla-generica [datos]="autores" [columnas]="columnasAutor" 
+[modelos]="modeloAutor"></app-tabla-generica>
 
 
 <div *ngIf="modoElegido === 'Comprar'">

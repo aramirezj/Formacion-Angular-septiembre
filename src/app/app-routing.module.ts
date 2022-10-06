@@ -1,15 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CreacionLibrosComponent } from './creacion-libros/creacion-libros.component';
-import { ExpositorLibrosComponent } from './expositor-libros/expositor-libros.component';
-import { GestionaSesionComponent } from './gestiona-sesion/gestiona-sesion.component';
-import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
-    { path: 'expositorLibros', component: ExpositorLibrosComponent },
-    { path: 'gestionaSesion', component: GestionaSesionComponent },
-    { path: 'creacionLibros', component: CreacionLibrosComponent, canActivate: [AuthGuard] }
+    {
+        path: 'usuario', loadChildren: () => import('./modules/usuario/usuario.module').then(m => m.UsuarioModule)
+    },
+    {
+        path: 'libro', loadChildren: () => import('./modules/libro/libro.module').then(m => m.LibroModule)
+    }
+
 ];
+//La ruta de gestiona sesión, se mueve de app-routing a usuario-routing
+//Se mueve la carpeta gestionaSesion adentro de la carpeta Usuario del modulo
+//Se escribe la ruta al modulo usuario aqui en app-routing
+//Movemos los modulos relacionados con formularios del app-module al sharedModule
+//Importamos el sharedModule en el usuarioModule
+//Actualizamos la ruta de /gestionaSesion en el app.component.html a usuario/gestionaSesion
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

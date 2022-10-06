@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { Subscription } from 'rxjs';
 import { EdicionLibroComponent } from '../edicion-libro/edicion-libro.component';
-import { Libro } from '../Libro';
-import { LibroService } from '../services/libro.service';
+import { Libro } from '../../../interfaces/Libro';
+import { LibroService } from '../../../services/libro.service';
 
 @Component({
     selector: 'app-libro',
     templateUrl: './libro.component.html',
     styleUrls: ['./libro.component.scss']
 })
-export class LibroComponent implements OnInit {
+export class LibroComponent implements OnInit, OnDestroy {
     /** Información del libro que tiene que mostrar recibida de su componente padre */
     @Input() libro: Libro;
     /** Modo de lectura del componente, que hace que, los botones se oculten */
@@ -19,7 +20,6 @@ export class LibroComponent implements OnInit {
     /** Evento de notificación a enviar cuando se compra un libro */
     @Output() notificacionCompra: EventEmitter<void> = new EventEmitter();
 
-
     constructor(
         private libroService: LibroService,
         public dialog: MatDialog
@@ -27,14 +27,17 @@ export class LibroComponent implements OnInit {
 
     //
     borrar() {
-        this.libroService.borraLibroBBDD(this.libro).
-            subscribe(resultado => {
-                console.log(resultado);
-            })
+        this.libroService.borraLibroBBDD(this.libro).subscribe(resultado => {
+            console.log(resultado);
+        });
     }
 
 
     ngOnInit(): void {
+    }
+
+    ngOnDestroy():void{
+
     }
 
     /** Método que resta una unidad del libro, y emite el evento */
@@ -69,9 +72,9 @@ export class LibroComponent implements OnInit {
 
         dialogRef.afterClosed().subscribe(libroActualizado => {
             //if(libroActualizado){
-                this.libro = libroActualizado;
-           // }
-        
+            this.libro = libroActualizado;
+            // }
+
         });
 
     }

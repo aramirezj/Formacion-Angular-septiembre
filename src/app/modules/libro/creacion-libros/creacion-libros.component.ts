@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Libro } from '../Libro';
-import { LibroService } from '../services/libro.service';
+import { Libro } from '../../../interfaces/Libro';
+import { LibroService } from '../../../services/libro.service';
 
 @Component({
     selector: 'app-creacion-libros',
@@ -19,6 +19,7 @@ export class CreacionLibrosComponent implements OnInit {
         private _snackBar: MatSnackBar
     ) {
         console.log(this.libroService.miLibroFavorito);
+        this.libroService.tituloWeb.next('Creación de libros');
     }
 
     ngOnInit(): void {
@@ -32,6 +33,7 @@ export class CreacionLibrosComponent implements OnInit {
         });
 
         this.formularioCreacion.valueChanges.subscribe(valorActualFormulario => {
+          //  console.log(valorActualFormulario);
             this.mensajeExito = null;
             this.libroCreado = valorActualFormulario;
         });

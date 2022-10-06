@@ -3,7 +3,7 @@
 
     <mat-form-field appearance="fill">
         <mat-label>Titulo del libro</mat-label>
-        <input matInput formControlName="titulo">
+        <input matInput formControlName="titulo"  appConversionInput="sinEspacios">
         <mat-error *ngIf="formularioCreacion.get('titulo').hasError('required')">El campo es obligatorio</mat-error>
         <mat-error *ngIf="formularioCreacion.get('titulo').hasError('minlength')">El campo debe superar los 3 carácteres
         </mat-error>

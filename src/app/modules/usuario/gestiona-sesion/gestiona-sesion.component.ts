@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LibroService } from '../../../services/libro.service';
 
 
 export interface TipoLoginForm {
@@ -21,7 +22,8 @@ export class GestionaSesionComponent implements OnInit {
 
     constructor(
         private router: Router
-    ) { }
+    ) {
+     }
 
     ngOnInit(): void {
         const token: string = sessionStorage.getItem('token');

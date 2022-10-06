@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Observable } from 'rxjs';
-import { Libro } from '../Libro';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Libro } from '../interfaces/Libro';
 
 @Injectable()
 export class LibroService {
@@ -9,6 +9,9 @@ export class LibroService {
     miLibroFavorito: string = 'Cien años de soledad';
     /** Actua de base de datos */
     librosOfrecidos: Libro[];
+
+    tituloWeb:BehaviorSubject<string> = new BehaviorSubject('Mi libreria');
+
     constructor(
         private _snackBar: MatSnackBar
     ) {
@@ -41,6 +44,11 @@ export class LibroService {
                 observer.complete();
             }, 3000);
         });
+    }
+
+    recuperaInfoExtra(titulo:string):string{
+        const libroEncontrado:Libro = this.librosOfrecidos.find(libro => libro.titulo === titulo);
+        return 'Pues el libro es muy interesante';
     }
 
 

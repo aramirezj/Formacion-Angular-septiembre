@@ -1,5 +1,5 @@
 <mat-card>
-    <mat-card-title appDecoraEtiquetas>{{libro.titulo | addPuntos:'pepe'}}</mat-card-title>
+    <mat-card-title appDecoraEtiquetas>{{libro.titulo | uppercase}}</mat-card-title>
     <mat-card-subtitle>{{libro.autor | addPuntos}}</mat-card-subtitle>
     <mat-card-subtitle *ngIf="libro.precio">{{libro.precio | addPuntos}} €</mat-card-subtitle>
     <mat-card-subtitle *ngIf="libro.stock">{{libro.stock | addPuntos}} unidades</mat-card-subtitle>
